@@ -1,0 +1,20 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:13
+#EXT-X-MEDIA-SEQUENCE:0
+{{- range $h := .hours -}}
+{{- range $m := $.minutes -}}
+{{""}}
+#EXTINF:12.500000,
+/ts/{{$.cameraID}}-{{$.day}}-{{$h}}-{{$m}}_000.ts
+#EXTINF:12.500000,
+/ts/{{$.cameraID}}-{{$.day}}-{{$h}}-{{$m}}_001.ts
+#EXTINF:12.500000,
+/ts/{{$.cameraID}}-{{$.day}}-{{$h}}-{{$m}}_002.ts
+#EXTINF:12.500000,
+/ts/{{$.cameraID}}-{{$.day}}-{{$h}}-{{$m}}_003.ts
+#EXTINF:10.050000,
+/ts/{{$.cameraID}}-{{$.day}}-{{$h}}-{{$m}}_004.ts
+#EXT-X-DISCONTINUITY
+{{- end -}}
+{{- end -}}

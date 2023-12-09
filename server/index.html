@@ -1,0 +1,30 @@
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>hlsjs</title>
+</head>
+<body>
+
+{{- range $cameraID := .cameraIDs -}}
+
+<h1>Camera {{$cameraID}}</h1>
+<video id="video-{{$cameraID}}" controls></video>
+
+<script>
+    const video{{$cameraID}} = document.getElementById('video-{{$cameraID}}'); //videoタグと同じIDにする
+    video.addEventListener('wheel', function(e) {
+        video{{$cameraID}}.currentTime += e.deltaY / 100;
+        e.preventDefault();
+    });
+    
+    if(Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource('/m3u8/{{$cameraID}}/20211031'); //ここで.m3u8ファイルを指定
+        hls.attachMedia(video{{$cameraID}});
+    }
+</script>
+
+{{- end -}}
+
+
+</body>
